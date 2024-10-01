@@ -42,14 +42,20 @@ public class CrearOrderStoreSD {
     }
 
     @When("Consultar el ordenStore con id{int}")
-    public void consultarElOrdenStoreConIdId() {
+    public void consultarElOrdenStoreConIdId(int id) {
+        orderStoreStep.consultarOrderStore(id);
     }
 
     @Then("valido que el codigo sea {int}")
-    public void validoQueElCodigoSeaCodigo() {
+    public void validoQueElCodigoSeaCodigo(int codigo) {
+        orderStoreStep.validarCodigoRespuesta1(codigo);
     }
 
-    @And("La respuesta debe contener id{int}, petId{int}, quantity{int}")
-    public void laRespuestaDebeContenerIdIdPetIdPetIdQuantityQuantity() {
+    @And("La respuesta debe contener id(.*), petId(.*), quantity(.*)$")
+    public void laRespuestaDebeContenerIdIdPetIdPetIdQuantityQuantity(int id, int PetId, int Quantity) {
+        OrderStore orderStore=orderStoreStep.obtenerRespuestaOrder();
+        assertEquals(id,orderStore.getId());
+        assertEquals(PetId,orderStore.getPetId());
+        assertEquals(Quantity,orderStore.getQuantity());
     }
 }

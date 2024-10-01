@@ -1,7 +1,10 @@
 package com.everis.base;
 
 import com.everis.base.models.OrderStore;
-import static io.restassured.RestAssured.given;
+import static net.serenitybdd.rest.SerenityRest.given;
+import static net.serenitybdd.rest.SerenityRest.lastResponse;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.CoreMatchers.is;
 
 public class OrderStoreStep {
 
@@ -44,6 +47,26 @@ public class OrderStoreStep {
     }
 
     public OrderStore obtenerRespuestaOrder(){
+        return respuestaOrder;
+    }
+
+    public void consultarOrderStore(int id){
+        respuestaOrder =given()
+                .baseUri(URL_BASE)
+                .when()
+                .get("/store/order/"+id)
+                .as(OrderStore.class);
+    }
+    private void listarOrderStore(OrderStore orderStore){
+        System.out.println("ID Creado: " + orderStore.getPetId());
+        System.out.println("PetID Creado: " + orderStore.getPetId());
+        System.out.println("Quantity Creado: " + orderStore.getQuantity());
+
+    }
+    public void validarCodigoRespuesta1(int i){
+        assertThat(lastResponse().statusCode(),is(i));
+    }
+    public OrderStore obtenerRespuestasdeOrderStore(){
         return respuestaOrder;
     }
 
