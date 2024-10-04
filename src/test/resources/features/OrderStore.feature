@@ -1,6 +1,6 @@
-
+@CrearConsultarOrderStore
 Feature: Gestión de ordenes de la tienda
-  @CrearConsultarOrderStore
+ 
 
   Scenario Outline: Crear una nueva orden
     Given dado que estoy en la pagina
